@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {%block content%}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+        </div>
+        {% endfor %}
+    {% endif%}
+  
+    {% if items%}
+    <table  class="table table-bordered">
+        {%for item in items%}
+        {% if item.completed %}
+        <tr class="striker">
+            <td><a href="{% url 'edit' item.id %}" class="text-danger"> {{item.item}}</a> </td>
+            <td><a href="{% url 'task_notdone' item.id %}" class="text-danger">Task Is Done! </a> </td> 
+           <td> <a href="{% url 'delete' item.id %}" role="button" class="btn btn-danger">Delete</a> </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td><a href="{% url 'edit' item.id %}" class="text-success"> {{item.item}}</a> </td>
+            <td> <a href="{% url 'task_done' item.id %}"  class="text-success">Task Is Undone.</a> </td> 
+            <td> <a href="{% url 'delete' item.id %}" role="button" class="btn btn-success">Delete</a> </td>
+        </tr>
+
+       
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <center>
+    <a href="https://www.facebook.com/profile.php?id=100013021500313&ref=br_tf&epa=SEARCH_BOX"><button type="button" class="btn btn-primary"><i class="facebook-f">Connect Developer</i></button></a>
+    <a href="https://github.com/KarimGil/DJANGO-To-Do-APP"><button type="button" class="btn btn-dark"><i class="github-alt">Get Source Code</i></button></a>
+
+    </center>
+
+    {% endblock %}
+</body>
+</html>
